@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan Creation - OnboardEase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #2E7D32;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        .container {
+            padding: 2rem;
+            max-width: 900px;
+            margin: auto;
+        }
+        .form-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 2rem;
+        }
+        .form-section h2 {
+            color: #2E7D32;
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            margin: 1rem 0 0.5rem;
+            font-size: 1.1rem;
+        }
+        select, input, button {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        button {
+            background-color: #2E7D32;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #25692A;
+        }
+        .template-links {
+            margin-top: 2rem;
+        }
+        .template-links a {
+            display: block;
+            margin: 0.5rem 0;
+            text-decoration: none;
+            color: #2E7D32;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Plan Creation</h1>
+    </header>
+    
+    <div class="container">
+        <!-- Role Selection Section -->
+        <div class="form-section">
+            <h2>Select Role</h2>
+            <label for="role">Choose a role for the onboarding plan:</label>
+            <select id="role" name="role">
+                <option value="sales">Sales Representative</option>
+                <option value="hr">HR Associate</option>
+                <option value="it">IT Specialist</option>
+            </select>
+        </div>
+
+        <!-- Download Templates Section -->
+        <div class="form-section">
+            <h2>Download Templates</h2>
+            <p>Select and download a prebuilt onboarding template for customization:</p>
+            <div class="template-links">
+                <a href="#" download="Sales_Onboarding_Template.docx">Sales Onboarding Template</a>
+                <a href="#" download="HR_Onboarding_Template.docx">HR Onboarding Template</a>
+                <a href="#" download="IT_Onboarding_Template.docx">IT Onboarding Template</a>
+            </div>
+        </div>
+
+        <!-- Customization Section -->
+        <div class="form-section">
+            <h2>Customize Onboarding Plan</h2>
+            <label for="planName">Onboarding Plan Name:</label>
+            <input type="text" id="planName" name="planName" placeholder="Enter plan name...">
+
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate">
+
+            <button>Create and Download Custom Plan</button>
+        </div>
+    </div>
+</body>
+</html>
