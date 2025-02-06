@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plan Creation - OnboardEase</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.5.1/docx.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -57,16 +58,6 @@
         button:hover {
             background-color: #25692A;
         }
-        .template-links {
-            margin-top: 2rem;
-        }
-        .template-links a {
-            display: block;
-            margin: 0.5rem 0;
-            text-decoration: none;
-            color: #2E7D32;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
@@ -80,21 +71,10 @@
             <h2>Select Role</h2>
             <label for="role">Choose a role for the onboarding plan:</label>
             <select id="role" name="role">
-                <option value="sales">Sales Representative</option>
-                <option value="hr">HR Associate</option>
-                <option value="it">IT Specialist</option>
+                <option value="Sales Representative">Sales Representative</option>
+                <option value="HR Associate">HR Associate</option>
+                <option value="IT Specialist">IT Specialist</option>
             </select>
-        </div>
-
-        <!-- Download Templates Section -->
-        <div class="form-section">
-            <h2>Download Templates</h2>
-            <p>Select and download a prebuilt onboarding template for customization:</p>
-            <div class="template-links">
-                <a href="https://raw.githubusercontent.com/Anca-Chiosa/onboard-ease/main/Sales_Onboarding_Template.docx" download="Sales_Onboarding_Template.docx">Sales Onboarding Template</a>
-                <a href="https://raw.githubusercontent.com/Anca-Chiosa/onboard-ease/main/HR_Onboarding_Template.docx" download="HR_Onboarding_Template.docx">HR Onboarding Template</a>
-                <a href="https://raw.githubusercontent.com/Anca-Chiosa/onboard-ease/main/IT_Specialist_Onboarding_Template.docx" download="IT_Specialist_Onboarding_Template.docx">IT Specialist Onboarding Template</a>
-            </div>
         </div>
 
         <!-- Customization Section -->
@@ -106,8 +86,64 @@
             <label for="startDate">Start Date:</label>
             <input type="date" id="startDate" name="startDate">
 
-            <button>Create and Download Custom Plan</button>
+            <button id="downloadButton">Create and Download Custom Plan</button>
         </div>
     </div>
+
+    <script>
+        document.getElementById("downloadButton").addEventListener("click", function() {
+            // Get user input
+            const planName = document.getElementById("planName").value || "Custom Onboarding Plan";
+            const startDate = document.getElementById("startDate").value || "Not Specified";
+            const role = document.getElementById("role").value;
+
+            // Create document content
+            const doc = new docx.Document({
+                sections: [
+                    {
+                        properties: {},
+                        children: [
+                            new docx.Paragraph({
+                                text: `${planName}`,
+                                heading: docx.HeadingLevel.HEADING_1,
+                                alignment: docx.AlignmentType.CENTER,
+                            }),
+                            new docx.Paragraph({
+                                text: `Role: ${role}`,
+                                spacing: { after: 200 },
+                            }),
+                            new docx.Paragraph({
+                                text: `Start Date: ${startDate}`,
+                                spacing: { after: 400 },
+                            }),
+                            new docx.Paragraph({
+                                text: "Welcome to your onboarding plan! Below are your first steps:",
+                                spacing: { after: 300 },
+                            }),
+                            new docx.Paragraph({
+                                text: "1. Attend orientation and meet your team.",
+                            }),
+                            new docx.Paragraph({
+                                text: "2. Review the onboarding materials provided.",
+                            }),
+                            new docx.Paragraph({
+                                text: "3. Complete your first-week checklist tasks.",
+                            }),
+                        ],
+                    },
+                ],
+            });
+
+            // Generate and download the document
+            docx.Packer.toBlob(doc).then((blob) => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = `${planName.replace(/\s+/g, "_")}.docx`;
+                a.click();
+                window.URL.revokeObjectURL(url);
+            });
+        });
+    </script>
 </body>
 </html>
